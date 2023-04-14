@@ -15,23 +15,23 @@
 	export let elem_id: string = "";
 	export let elem_classes: Array<string> = [];
 	export let visible: boolean = true;
-	export let value: [FileData, FileData | null] | null = null;
-	let old_value: [FileData, FileData | null] | null = null;
+	export let value: null | [FileData, FileData | null] = null;
+	let old_value: null | [FileData, FileData | null] = null;
 
+	export let mode: "static" | "dynamic";
 	export let label: string;
 	export let source: string;
 	export let root: string;
 	export let root_url: null | string;
 	export let show_label: boolean;
-	export let loading_status: LoadingStatus;
 	export let style: Styles = {};
 	export let mirror_webcam: boolean;
 	export let include_audio: boolean;
 
-	export let mode: "static" | "dynamic";
+	export let loading_status: LoadingStatus;
 
-	let _video: FileData | null = null;
-	let _subtitle: FileData | null = null;
+	let _video: null | FileData = null;
+	let _subtitle: null | FileData = null;
 
 	let dragging = false;
 
@@ -60,7 +60,6 @@
 		}
 	}
 
-
 	let pending_upload = false;
 	$: {
 		if (JSON.stringify(value) !== JSON.stringify(old_value)) {
@@ -68,14 +67,13 @@
 			if (_video === null) {
 				dispatch("change");
 				pending_upload = false;
-			}  else if (
+			} else if (
 				!(Array.isArray(_video) ? _video : [_video]).every(
 					(file_data) => file_data.blob
 				)
 			) {
 				pending_upload = false;
-			}
-			else if (mode === "dynamic") {
+			} else if (mode === "dynamic") {
 				let files = (Array.isArray(_video) ? _video : [_video]).map(
 					(file_data) => file_data.blob!
 				);
@@ -94,9 +92,7 @@
 						(async () => {
 							_video.data = await blobToBase64(_video.blob!);
 						})();
-
 					} else {
-
 						if (response.files) {
 							_video.orig_name = _video.name;
 							_video.name = response.files[0];
