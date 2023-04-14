@@ -12,51 +12,66 @@ def get_file_size_mb(file_path):
     return file_size_mb
 
 
-def video_demo(video, audio, file, subtitle=None):
+def filesize_demo(video, audio, file):
     original_file_size_mb = None
     if file is not None:
         original_file_size_mb = get_file_size_mb(file.name)
 
     gradio_media_file_size_mb = None
     if video is not None:
-        final_file = video
         gradio_media_file_size_mb = get_file_size_mb(video)
     elif audio is not None:
-        final_file = audio
-        print(audio)
         gradio_media_file_size_mb = get_file_size_mb(audio)
+
+    return [original_file_size_mb, gradio_media_file_size_mb]
+
+
+def video_demo(video, audio, file, subtitle=None):
+    if video is not None:
+        final_file = video
+    elif audio is not None:
+        final_file = audio
     else:
         final_file = file.name
 
     if subtitle is None:
-        return [final_file, original_file_size_mb, gradio_media_file_size_mb]
+        return final_file
     else:
-        return [
-            (final_file, subtitle.name),
-            original_file_size_mb,
-            gradio_media_file_size_mb,
-        ]
+        return [final_file, subtitle.name]
 
 
-demo = gr.Interface(
-    fn=video_demo,
-    inputs=[
-        gr.Video(type="file", label="Video", interactive=True),
-        gr.Audio(type="filepath", label="Audio", interactive=True),
-        gr.File(label="File"),
-        gr.File(label="Subtitle", file_types=[".srt", ".vtt"]),
-    ],
-    outputs=[
-        gr.Video(label="Out"),
-        gr.outputs.Textbox(label="File input filesize"),
-        gr.outputs.Textbox(label="Media input filesize"),
-    ],
-    examples=[
-        [a, s1],
-        [b, s2],
-        [a, None],
-    ],
-)
+with gr.Blocks() as demo:
+    with gr.Row():
+        with gr.Column():
+            video_input = gr.Video(type="file", label="Video", interactive=True)
+            audio_input = gr.Audio(type="filepath", label="Audio", interactive=True)
+            file_input = gr.File(label="File")
+            subtitle_input = gr.File(label="Subtitle", file_types=[".srt", ".vtt"])
+            submit_btn = gr.Button()
+        with gr.Column():
+            video_out = gr.Video(label="Out")
+            original_size_out = gr.Textbox(label="File input filesize")
+            upload_size_out = gr.Textbox(label="Media input filesize")
+            audio_upload_out = gr.Textbox(label="Audio upload check")
+
+    submit_btn.click(
+        video_demo,
+        inputs=[video_input, audio_input, file_input, subtitle_input],
+        outputs=[video_out],
+    )
+
+    submit_btn.click(
+        filesize_demo,
+        inputs=[video_input, audio_input, file_input],
+        outputs=[original_size_out, upload_size_out],
+    )
+
+    audio_input.upload(
+        lambda: "Work fine",
+        inputs=None,
+        outputs=[audio_upload_out],
+    )
+
 
 if __name__ == "__main__":
     demo.launch()
