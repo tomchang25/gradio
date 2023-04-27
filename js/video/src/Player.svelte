@@ -41,7 +41,6 @@
 	}
 
 	async function play_pause() {
-		// Only check play_pause when not in full-screen mode to prevent duplicate event triggers.
 		if (document.fullscreenElement != video) {
 			const isPlaying =
 				video.currentTime > 0 &&

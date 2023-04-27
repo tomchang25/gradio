@@ -6,28 +6,45 @@
 
 ## Bug Fixes:
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 - Fixed issue with old_value check in File. by [@tomchang25](https://github.com/tomchang25) in [PR 3854](https://github.com/gradio-app/gradio/pull/3854).
 - Improved base64 upload for Video and Audio, resulting in faster upload and support for large files. by [@tomchang25](https://github.com/tomchang25) in [PR 3854](https://github.com/gradio-app/gradio/pull/3854).
 =======
+=======
+- Fix duplicate play commands in full-screen mode of 'video'. by [@tomchang25](https://github.com/tomchang25) in [PR 3968](https://github.com/gradio-app/gradio/pull/3968).
+- Fix the issue of the UI stuck caused by the 'selected' of DataFrame not being reset. by [@tomchang25](https://github.com/tomchang25) in [PR 3916](https://github.com/gradio-app/gradio/pull/3916).
+>>>>>>> 2a59ec04fa7ab4d4dbe31e7bec4c702a583330af
 - Fix issue where `gr.Video()` would not work inside a `gr.Tab()` by [@dawoodkhan82](https://github.com/dawoodkhan82) in [PR 3891](https://github.com/gradio-app/gradio/pull/3891)
 - Fixed issue with old_value check in File. by [@tomchang25](https://github.com/tomchang25) in [PR 3859](https://github.com/gradio-app/gradio/pull/3859).
 - Fixed bug where all bokeh plots appeared in the same div by [@freddyaboulton](https://github.com/freddyaboulton) in [PR 3896](https://github.com/gradio-app/gradio/pull/3896)
 - Fixed image outputs to automatically take full output image height, unless explicitly set,  by [@aliabid94](https://github.com/aliabid94) in [PR 3905](https://github.com/gradio-app/gradio/pull/3905)
 - Fix issue in `gr.Gallery()` where setting height causes aspect ratio of images to collapse by [@dawoodkhan82](https://github.com/dawoodkhan82) in [PR 3830](https://github.com/gradio-app/gradio/pull/3830)
+<<<<<<< HEAD
 >>>>>>> 9d7fde4f164e557b607fcae04c3d367c98d9eef7
+=======
+- Fix issue where requesting for a non-existing file would trigger a 500 error by [@micky2be](https://github.com/micky2be) in `[PR 3895](https://github.com/gradio-app/gradio/pull/3895)`.
+- Fix bugs with abspath about symlinks, and unresolvable path on Windows by [@micky2be](https://github.com/micky2be) in `[PR 3895](https://github.com/gradio-app/gradio/pull/3895)`.
+- Fixes type in client `Status` enum by [@10zinten](https://github.com/10zinten) in [PR 3931](https://github.com/gradio-app/gradio/pull/3931)
+- Fix `gr.ChatBot` to handle image url [tye-singwa](https://github.com/tye-signwa) in [PR 3953](https://github.com/gradio-app/gradio/pull/3953)
+- Move Google Tag Manager related initialization code to analytics-enabled block by [@akx](https://github.com/akx) in [PR 3956](https://github.com/gradio-app/gradio/pull/3956)
+- Fix bug where port was not reused if the demo was closed and then re-launched by [@freddyaboulton](https://github.com/freddyaboulton) in [PR 3896](https://github.com/gradio-app/gradio/pull/3959)
+- Fixes issue where dropdown does not position itself at selected element when opened [@dawoodkhan82](https://github.com/dawoodkhan82) in [PR 3639](https://github.com/gradio-app/gradio/pull/3639)
+>>>>>>> 2a59ec04fa7ab4d4dbe31e7bec4c702a583330af
 
 ## Documentation Changes:
 
 - Make use of `gr` consistent across the docs by [@duerrsimon](https://github.com/duerrsimon) in [PR 3901](https://github.com/gradio-app/gradio/pull/3901)
+- Fixed typo in theming-guide.md by [@eltociear](https://github.com/eltociear) in [PR 3952](https://github.com/gradio-app/gradio/pull/3952)
 
 ## Testing and Infrastructure Changes:
 
-No changes to highlight.
+- CI: Python backend lint is only run once, by [@akx](https://github.com/akx) in [PR 3960](https://github.com/gradio-app/gradio/pull/3960)
 
 ## Breaking Changes:
 
-No changes to highlight.
+- Some re-exports in `gradio.themes` utilities (introduced in 3.24.0) have been eradicated.
+  By [@akx](https://github.com/akx) in [PR 3958](https://github.com/gradio-app/gradio/pull/3958)
 
 ## Full Changelog:
 
@@ -191,7 +208,11 @@ No changes to highlight.
 
 - Fixes Chatbot issue where new lines were being created every time a message was sent back and forth by [@aliabid94](https://github.com/aliabid94) in [PR 3717](https://github.com/gradio-app/gradio/pull/3717).
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+- Fixes data updating in DataFrame invoking a `select` event once the dataframe has been selected. By [@yiyuezhuo](https://github.com/yiyuezhuo) in [PR 3861](https://github.com/gradio-app/gradio/pull/3861)
+>>>>>>> 2a59ec04fa7ab4d4dbe31e7bec4c702a583330af
 - Fixes false postive warning which is due to too strict type checking by [@yiyuezhuo](https://github.com/yiyuezhuo) in [PR 3837](https://github.com/gradio-app/gradio/pull/3837).
 >>>>>>> 9d7fde4f164e557b607fcae04c3d367c98d9eef7
 
